@@ -1,42 +1,45 @@
-# One-Pagers studio hero scene
+# onepagers landing hero
 
 ## Purpose
 
-The studio page should make the promise legible in one glance: we build small
-tools for repetitive document work that is too specific for a generic app.
-The hero stays calm and editorial, while a few paper artifacts make the work
-feel real instead of decorative.
+The first screen should answer the only question that matters: what does
+onepagers do for me? The answer is "Stop retyping PDFs." The heading is centered,
+set in Geist Pixel, and followed immediately by a one-sentence promise and a
+clear route to the three tools.
+
+## Literal noun-world
+
+- A Closing Disclosure PDF with line items and a cash-to-close value.
+- A discovery production with names, dates, exhibits, and Bates references.
+- A K-1 or 1099 form with source boxes and tax values.
+- An extracted field list with confidence and source-page evidence.
 
 ## Composition
 
-- Canvas: a centered 1180px content frame, with a shallow top navigation and a
-  hero min-height of 690px on desktop.
-- Headline exclusion zone: the left 55% of the hero from y=130 to y=390 is
-  reserved for the headline, one-sentence explanation, and tool links.
-- Product mock: a two-layer extraction review card sits at x=535px, y=420px,
-  bleeds toward the lower edge, and remains behind the copy's exclusion zone.
-- Props: four independent SVG assets, each positioned separately and clipped by
-  the hero scene: a closing disclosure sheet at top-left, a discovery index at
-  top-right, a 1099/K-1 form at lower-left, and an annotated pencil strip at
-  lower-right.
-- Depth: each prop gets its own subtle drop shadow and a slightly different
-  rotation; the review card uses a flatter shadow so the paper props read as
-  objects and the product mock reads as the actual tool.
+- Canvas: Clean Desk neutral `#F4F4F1` inside the centered onepagers frame.
+- Navigation: one compact white control surface with the mark, two anchors, and
+  enough padding to read as a real interface rather than a loose text row.
+- Headline: centered in the first fold; the hero copy owns the upper half and
+  the main action is reachable without hunting.
+- Product layer: a coded extraction workbench is centered beneath the copy. It
+  shows a source PDF beside extracted fields, confidence, and page evidence.
+- Old floating document props are intentionally removed in this pass. A future
+  illustration can be sourced as independent assets after its art direction is
+  approved; no single background image is used as a substitute.
 
 ## Restraints
 
-- Keep the prop palette to paper white, ink navy, muted blue, and one teal
-  accent already used by the extractor pages.
-- Use no gradients, stock icon set, or abstract blob decoration.
-- Keep each prop's SVG self-contained so it can be inspected, reused, and
-  independently moved without rebuilding the composition.
-- On mobile, hide the two rear props and keep only the document stack behind the
-  copy; the upload-tool links must remain the dominant action.
+- Use the established three-font system: Geist Pixel for the hero and system
+  labels, Louize for section and tool headings, Space Grotesk for body copy.
+- Keep the palette to the committed Clean Desk roles: cool neutral canvas,
+  white surface, ink, muted text, structural blue, and amber status.
+- Avoid decorative gradients, abstract blobs, stock imagery, and ornamental
+  arrows. The product workbench is the visual proof.
 
 ## Accessibility and motion
 
-- Props are decorative images with empty alt text; the real product names and
-  actions remain in HTML.
-- The product mock uses ordinary HTML text, not text baked into an image.
-- Motion is limited to a small hover lift on tool cards and respects reduced
-  motion preferences.
+- The heading remains real HTML text, with a screen-reader-only final string
+  alongside the animated display.
+- The main action is a real anchor with keyboard focus styling.
+- The text scramble becomes immediate when the visitor prefers reduced motion.
+- The workbench is ordinary HTML so it remains legible and adaptable.
