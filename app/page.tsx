@@ -42,9 +42,9 @@ export default function HomePage() {
   return (
     <main className="studio-shell">
       <header className="studio-header">
-        <a className="studio-wordmark" href="#top" aria-label="Molt Rebirth home">
+        <a className="studio-wordmark" href="#top" aria-label="onepagers home">
           <span className="studio-mark"><StudioMark /></span>
-          <span>Molt Rebirth</span>
+          <span>onepagers</span>
         </a>
         <nav className="studio-nav" aria-label="Main navigation">
           <a href="#tools">The tools</a>
@@ -127,7 +127,7 @@ export default function HomePage() {
       </section>
 
       <footer className="studio-footer">
-        <a className="studio-wordmark" href="#top"><span className="studio-mark"><StudioMark /></span><span>Molt Rebirth</span></a>
+        <a className="studio-wordmark" href="#top"><span className="studio-mark"><StudioMark /></span><span>onepagers</span></a>
         <span>Small tools for serious repetitive work.</span>
       </footer>
     </main>
