@@ -17,15 +17,15 @@ clear route to the three tools.
 ## Composition
 
 - Canvas: Clean Desk neutral `#F4F4F1` inside the centered onepagers frame.
-- Navigation: one compact white control surface with the mark, two anchors, and
-  enough padding to read as a real interface rather than a loose text row.
+- Navigation: a canvas-level pixel wordmark at the left and a centered,
+  soft-pill control for the two section anchors; no surrounding shell or mark.
 - Headline: centered in the first fold; the hero copy owns the upper half and
   the main action is reachable without hunting.
-- Product layer: a coded extraction workbench is centered beneath the copy. It
-  shows a source PDF beside extracted fields, confidence, and page evidence.
-- Old floating document props are intentionally removed in this pass. A future
-  illustration can be sourced as independent assets after its art direction is
-  approved; no single background image is used as a substitute.
+- Product layer: the supplied `/public/hero.avif` illustration is centered
+  beneath the copy at its native 3:2 proportion. It shows the document teams
+  these tools are made for, without replacing the real tool previews below.
+- The old coded workbench illustration is removed from the landing hero. The
+  supplied asset is used exactly as requested and is not stretched or cropped.
 
 ## Restraints
 

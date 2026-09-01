@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ExpandingArrowLink } from "./components/expanding-arrow-link";
 import { TextScramble } from "./components/text-scramble";
 
@@ -42,7 +43,6 @@ export default function HomePage() {
     <main className="studio-shell">
       <header className="studio-header">
         <a className="studio-wordmark" href="#top" aria-label="onepagers home">
-          <span className="studio-mark"><StudioMark /></span>
           <span>onepagers</span>
         </a>
         <nav className="studio-nav" aria-label="Main navigation">
@@ -61,43 +61,16 @@ export default function HomePage() {
           <ExpandingArrowLink href="#tools">See the tools</ExpandingArrowLink>
         </div>
 
-        <div className="hero-workbench" aria-label="A document extraction workbench">
-          <div className="workbench-toolbar">
-            <span className="workbench-toolbar__brand">ONEPAGERS / WORKBENCH</span>
-            <span className="workbench-toolbar__status"><i aria-hidden="true" /> FIELD CHECK</span>
-          </div>
-          <div className="workbench-body">
-            <div className="workbench-source">
-              <span className="workbench-label">SOURCE PDF</span>
-              <strong>Closing Disclosure</strong>
-              <div className="workbench-lines" aria-hidden="true">
-                <span /><span /><span /><span /><span /><span />
-              </div>
-              <div className="workbench-capture">
-                <span>cash to close</span>
-                <b>$14,147.26</b>
-              </div>
-            </div>
-            <div className="workbench-result">
-              <span className="workbench-label">EXTRACTED FIELDS</span>
-              <div className="workbench-field">
-                <span>Loan amount</span>
-                <strong>$162,000</strong>
-                <b>HIGH CONFIDENCE</b>
-              </div>
-              <div className="workbench-field">
-                <span>Cash to close</span>
-                <strong>$14,147.26</strong>
-                <b>HIGH CONFIDENCE</b>
-              </div>
-              <div className="workbench-field">
-                <span>Source page</span>
-                <strong>Page 5</strong>
-                <b>TEXT LAYER</b>
-              </div>
-            </div>
-          </div>
-        </div>
+        <figure className="hero-image-frame">
+          <Image
+            className="hero-image"
+            src="/hero.avif"
+            alt="A team of document professionals holding forms and folders."
+            width={1536}
+            height={1024}
+            priority
+          />
+        </figure>
       </section>
 
       <section className="tools-section" id="tools" aria-labelledby="tools-title">
