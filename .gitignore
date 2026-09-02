@@ -17,3 +17,5 @@ pnpm-debug.log*
 /discovery-doc-extractor/
 /k1-extractor/
 /duplicate.sql
+
+.vercel

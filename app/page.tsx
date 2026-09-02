@@ -1,6 +1,9 @@
 import Image from "next/image";
+import { getLocale, getTranslations } from "next-intl/server";
 import { ExpandingArrowLink } from "./components/expanding-arrow-link";
+import { LanguageSwitcher } from "./components/language-switcher";
 import { TextScramble } from "./components/text-scramble";
+import { localizedPath, type Locale } from "../locale-config";
 
 function StudioMark() {
   return (
@@ -19,53 +22,52 @@ function StudioMark() {
 
 const TOOLS = [
   {
-    name: "Closing Doc Extractor",
-    kind: "CLOSING",
-    description: "Pull loan terms, costs, and cash to close from Closing Disclosure PDFs.",
+    key: "closing",
     href: "https://closing.molt-rebirth.in",
   },
   {
-    name: "Discovery Doc Extractor",
-    kind: "DISCOVERY",
-    description: "Turn a production into dated, named, numbered facts you can review and export.",
+    key: "discovery",
     href: "https://discovery.molt-rebirth.in",
   },
   {
-    name: "K-1 Extractor",
-    kind: "TAX FORMS",
-    description: "Read K-1 and 1099 values with their source boxes still attached.",
+    key: "k1",
     href: "https://k1.molt-rebirth.in",
   },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const locale = await getLocale() as Locale;
+  const t = await getTranslations("home");
+  const common = await getTranslations("common");
+
   return (
     <main className="studio-shell">
       <header className="studio-header">
-        <a className="studio-wordmark" href="#top" aria-label="onepagers home">
+        <a className="studio-wordmark" href={localizedPath(locale)} aria-label={common("homeAria")}>
           <span>onepagers</span>
         </a>
-        <nav className="studio-nav" aria-label="Main navigation">
-          <a href="#tools">The tools</a>
-          <a href="#why">Why this exists</a>
+        <nav className="studio-nav" aria-label={common("mainNavigation")}>
+          <a href="#tools" aria-current="page">{common("navTools")}</a>
+          <a href={localizedPath(locale, "why-this-exists")}>{common("navWhy")}</a>
         </nav>
+        <LanguageSwitcher />
       </header>
 
       <section className="studio-hero" id="top" aria-labelledby="studio-title">
         <div className="studio-hero-copy">
-          <p className="studio-eyebrow">ONEPAGERS / DOCUMENT TOOLS</p>
+          <p className="studio-eyebrow">{t("heroEyebrow")}</p>
           <h1 id="studio-title">
-            <TextScramble text={"Stop retyping\nPDFs."} className="hero-title-text" />
+            <TextScramble text={t("heroTitle")} className="hero-title-text" />
           </h1>
-          <p className="studio-hero-lede">Pull the facts out, keep the source close, and get back to the work.</p>
-          <ExpandingArrowLink href="#tools">See the tools</ExpandingArrowLink>
+          <p className="studio-hero-lede">{t("heroLede")}</p>
+          <ExpandingArrowLink href="#tools">{t("seeTools")}</ExpandingArrowLink>
         </div>
 
         <figure className="hero-image-frame">
           <Image
             className="hero-image"
             src="/hero.avif"
-            alt="A team of document professionals holding forms and folders."
+            alt={t("heroImageAlt")}
             width={1536}
             height={1024}
             priority
@@ -75,30 +77,25 @@ export default function HomePage() {
 
       <section className="tools-section" id="tools" aria-labelledby="tools-title">
         <div className="section-heading section-heading--center">
-          <p className="section-kicker">THE FIRST THREE</p>
-          <h2 id="tools-title">Three tools for work that keeps coming back.</h2>
-          <p>Pick the document. Get the facts. Keep moving.</p>
+          <p className="section-kicker">{t("toolsEyebrow")}</p>
+          <h2 id="tools-title">{t("toolsTitle")}</h2>
+          <p>{t("toolsIntro")}</p>
         </div>
 
         <div className="tool-showcase-list">
           {TOOLS.map((tool, index) => (
-            <article className={`tool-showcase${index % 2 ? " tool-showcase--reverse" : ""}`} key={tool.name}>
+            <article className={`tool-showcase${index % 2 ? " tool-showcase--reverse" : ""}`} key={tool.key}>
               <div className="tool-showcase-copy">
-                <p className="tool-kind">{tool.kind}</p>
-                <h3>{tool.name}</h3>
-                <p>{tool.description}</p>
+                <p className="tool-kind">{t(`tool${tool.key[0].toUpperCase()}${tool.key.slice(1)}Kind`)}</p>
+                <h3>{t(`tool${tool.key[0].toUpperCase()}${tool.key.slice(1)}Name`)}</h3>
+                <p>{t(`tool${tool.key[0].toUpperCase()}${tool.key.slice(1)}Description`)}</p>
                 <a className="tool-open-link" href={tool.href} target="_blank" rel="noreferrer">
-                  Open tool
+                  {t("openTool")}
                 </a>
               </div>
 
               <div className="tool-browser">
-                <div className="tool-browser-bar" aria-hidden="true">
-                  <span className="tool-browser-dots"><i /><i /><i /></span>
-                  <span className="tool-browser-url">{tool.href.replace("https://", "")}</span>
-                  <span className="tool-browser-state">READY</span>
-                </div>
-                <iframe src={tool.href} title={`${tool.name} tool`} loading="lazy" />
+                <iframe src={tool.href} title={`${t(`tool${tool.key[0].toUpperCase()}${tool.key.slice(1)}Name`)} ${t("toolFrameSuffix")}`} loading="lazy" scrolling="no" />
               </div>
             </article>
           ))}
@@ -107,40 +104,40 @@ export default function HomePage() {
 
       <section className="thinking-section" id="why" aria-labelledby="thinking-title">
         <div className="thinking-heading">
-          <h2 id="thinking-title">Tools with a point.</h2>
-          <p>We build for the work generic software keeps missing.</p>
+          <h2 id="thinking-title">{t("thinkingTitle")}</h2>
+          <p>{t("thinkingIntro")}</p>
         </div>
         <div className="thinking-grid">
           <article>
-            <span>NARROW SCOPE</span>
-            <h3>One ugly job. Done properly.</h3>
-            <p>Each tool targets a document workflow specific enough to deserve its own screen.</p>
+            <span>{t("pointScopeLabel")}</span>
+            <h3>{t("pointScopeTitle")}</h3>
+            <p>{t("pointScopeDescription")}</p>
           </article>
           <article>
-            <span>SOURCE ATTACHED</span>
-            <h3>Keep the proof.</h3>
-            <p>Extracted values stay tied to their file and page, so checking them is not a scavenger hunt.</p>
+            <span>{t("pointSourceLabel")}</span>
+            <h3>{t("pointSourceTitle")}</h3>
+            <p>{t("pointSourceDescription")}</p>
           </article>
           <article>
-            <span>READY TO MOVE</span>
-            <h3>Leave with a handoff.</h3>
-            <p>Get the facts out, send them on, and stop babysitting a spreadsheet.</p>
+            <span>{t("pointHandoffLabel")}</span>
+            <h3>{t("pointHandoffTitle")}</h3>
+            <p>{t("pointHandoffDescription")}</p>
           </article>
         </div>
       </section>
 
       <section className="studio-outro" aria-labelledby="outro-title">
         <div>
-          <p className="section-kicker">MORE TO COME</p>
-          <h2 id="outro-title">Have a document problem? Good.</h2>
-          <p>We build small tools for specialized work. If the job is repetitive and the software is bad, it belongs here.</p>
+          <p className="section-kicker">{t("outroEyebrow")}</p>
+          <h2 id="outro-title">{t("outroTitle")}</h2>
+          <p>{t("outroDescription")}</p>
         </div>
-        <a className="outline-link" href="#tools">Back to the tools</a>
+        <a className="outline-link" href="#tools">{common("backToTools")}</a>
       </section>
 
       <footer className="studio-footer">
-        <a className="studio-wordmark" href="#top"><span className="studio-mark"><StudioMark /></span><span>onepagers</span></a>
-        <span>Small tools for work worth fixing.</span>
+        <a className="studio-wordmark" href={localizedPath(locale)}><span className="studio-mark"><StudioMark /></span><span>onepagers</span></a>
+        <span>{t("footerLine")} <a href={localizedPath(locale, "faq")}>{common("readFaq")}</a></span>
       </footer>
     </main>
   );
