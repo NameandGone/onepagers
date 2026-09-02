@@ -3,22 +3,8 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { ExpandingArrowLink } from "./components/expanding-arrow-link";
 import { LanguageSwitcher } from "./components/language-switcher";
 import { TextScramble } from "./components/text-scramble";
+import { StackedCircularFooter } from "./components/stacked-circular-footer";
 import { localizedPath, type Locale } from "../locale-config";
-
-function StudioMark() {
-  return (
-    <svg className="studio-mark-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <path
-        d="M5.5 7.5c5.8-.8 12.1-.7 19 .2l2 2.2c.3 5.7.2 11.4-.5 15.2-6.7.9-13.9.8-20.3.1C5 19.9 4.8 13.2 5.5 7.5Z"
-        fill="var(--surface)"
-        stroke="currentColor"
-        strokeWidth="1.6"
-      />
-      <path d="m21.3 7.8 3.8 2.1-3.6.6-.2-2.7Z" fill="var(--line)" stroke="currentColor" strokeWidth="1.2" />
-      <path d="M9 14h9.8M9 17h7.3M9 20h10.2" stroke="var(--accent)" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  );
-}
 
 const TOOLS = [
   {
@@ -135,10 +121,14 @@ export default async function HomePage() {
         <a className="outline-link" href="#tools">{common("backToTools")}</a>
       </section>
 
-      <footer className="studio-footer">
-        <a className="studio-wordmark" href={localizedPath(locale)}><span className="studio-mark"><StudioMark /></span><span>onepagers</span></a>
-        <span>{t("footerLine")} <a href={localizedPath(locale, "faq")}>{common("readFaq")}</a></span>
-      </footer>
+      <StackedCircularFooter
+        homeHref={localizedPath(locale)}
+        toolsHref={`${localizedPath(locale)}#tools`}
+        whyHref={localizedPath(locale, "why-this-exists")}
+        faqHref={localizedPath(locale, "faq")}
+        description={t("thinkingIntro")}
+        note={t("footerLine")}
+      />
     </main>
   );
 }

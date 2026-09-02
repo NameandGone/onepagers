@@ -4,6 +4,7 @@ import { FaqAccordion } from "../components/faq-accordion";
 import { LanguageSwitcher } from "../components/language-switcher";
 import { localizedPath, type Locale } from "../../locale-config";
 import { makeLocalizedMetadata } from "../../i18n/seo";
+import { StackedCircularFooter } from "../components/stacked-circular-footer";
 
 type FaqItem = {
   question: string;
@@ -61,10 +62,14 @@ export default async function FaqPage() {
 
       <script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c") }} />
 
-      <footer className="studio-footer faq-page-footer">
-        <Link className="studio-wordmark" href={localizedPath(locale)}><span>onepagers</span></Link>
-        <span>{t("footerPrompt")} <Link href={`${localizedPath(locale)}#tools`}>{common("openTools")}</Link></span>
-      </footer>
+      <StackedCircularFooter
+        homeHref={localizedPath(locale)}
+        toolsHref={`${localizedPath(locale)}#tools`}
+        whyHref={localizedPath(locale, "why-this-exists")}
+        faqHref={localizedPath(locale, "faq")}
+        description={t("intro")}
+        note={t("footerPrompt")}
+      />
     </main>
   );
 }
