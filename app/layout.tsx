@@ -40,6 +40,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     <html lang={locale} dir={getDirection(locale)} suppressHydrationWarning>
       <head>
         <link rel="preload" href="/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/geist-pixel-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
       </head>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>

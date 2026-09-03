@@ -87,16 +87,11 @@
     "a9": "K-1 Extractor permite editar valores en la pantalla de revisión y descargar las filas comprobadas como CSV. Las otras herramientas ofrecen sus propias exportaciones.",
     "q10": "¿Qué tipos de archivo acepta onepagers?",
     "a10": "Las herramientas aceptan archivos PDF. Los controles de carga no aceptan documentos de Word, imágenes, hojas de cálculo ni otros formatos.",
-    "q11": "¿Qué tamaño puede tener mi PDF?",
-    "a11": "Depende de la herramienta: Closing admite hasta 20 MB por PDF y 100 MB por lote; Discovery y K-1 tienen un límite de procesamiento gratuito de 8 MB y 15 páginas antes de enviar el trabajo pesado a la cola.",
-    "q12": "¿Cuántos PDF puedo subir a la vez?",
-    "a12": "Closing admite hasta 50 PDF por lote. Discovery respeta el límite de lote que muestra la aplicación y K-1 está pensado para un PDF fiscal cada vez.",
-    "q13": "¿Qué ocurre si el archivo es demasiado grande o largo?",
-    "a13": "Cuando existe esa ruta, el trabajo que supera el límite gratuito se acepta y pasa a la cola de procesamiento pesado. La pantalla indica que está en cola en lugar de fingir que terminó.",
-    "q14": "¿Se guardan mis documentos después del procesamiento?",
-    "a14": "Las herramientas actuales procesan los archivos mediante el flujo de la aplicación y muestran los resultados en la sesión. El sitio no promete una política de conservación permanente; sube solo material que tengas autorización para procesar.",
-    "q15": "¿onepagers entrena modelos con mis documentos?",
-    "a15": "El sitio no afirma que los documentos subidos se utilicen para entrenar un modelo. Sigue las reglas de manejo de documentos de tu organización antes de subir material sensible.",
+    "q11": "Depende de la herramienta: Closing y K-1 procesan gratis PDF de hasta 8 MB y 15 páginas; Discovery usa el mismo límite gratuito por lote, permite hasta 80 páginas por PDF y hasta 50 PDF por lote. K-1 rechaza los PDF de más de 25 páginas.",
+    "q12": "Discovery acepta hasta 50 PDF en un lote. Closing y K-1 procesan un PDF por revisión.",
+    "q13": "Closing y K-1 ponen en cola el trabajo que supera el límite gratuito de 8 MB o 15 páginas. Discovery pone en cola los lotes que superan 8 MB o 15 páginas en total y rechaza más de 50 PDF o un PDF de más de 80 páginas.",
+    "q14": "Sí. Los bytes del PDF se eliminan automáticamente después del procesamiento. Las herramientas no guardan un historial de documentos; los resultados y metadatos de origen de la revisión actual permanecen en la sesión.",
+    "q15": "No. Los documentos subidos no se usan para entrenar modelos y el personal de onepagers no accede al contenido de los archivos procesados.",
     "q16": "¿Hay una API?",
     "a16": "La experiencia pública actual es la herramienta de carga en el navegador. No se anuncia una API pública y documentada.",
     "q17": "¿Qué tan precisa es la extracción?",
@@ -118,4 +113,3 @@
     "faqDescription": "Respuestas sobre documentos admitidos, límites, OCR, evidencia de origen, colas, API, precios y manejo de documentos en onepagers."
   }
 }
-

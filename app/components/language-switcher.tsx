@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useTransition } from "react";
 import { isLocale, LOCALES } from "../../locale-config";
+import { LocaleScramble } from "./locale-scramble";
 
 function withLocale(pathname: string, locale: string): string {
   const segments = pathname.split("/");
@@ -16,11 +17,20 @@ function withLocale(pathname: string, locale: string): string {
 }
 
 export function LanguageSwitcher() {
-  const currentLocale = useLocale();
+  const providerLocale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
   const t = useTranslations("common");
   const [isPending, startTransition] = useTransition();
+  const pathLocale = pathname.split("/")[1];
+  const currentLocale = isLocale(pathLocale) ? pathLocale : providerLocale;
+
+  useEffect(() => {
+    const metadata = LOCALES.find(({ code }) => code === currentLocale);
+    if (!metadata) return;
+    document.documentElement.lang = metadata.code;
+    document.documentElement.dir = metadata.dir;
+  }, [currentLocale]);
 
   useEffect(() => {
     if (!isPending) document.documentElement.removeAttribute("data-locale-transition");
@@ -46,7 +56,9 @@ export function LanguageSwitcher() {
           <option key={code} value={code}>{name}</option>
         ))}
       </select>
-      <span className="locale-transition-indicator" aria-hidden="true">{isPending ? "///" : ""}</span>
+      <span className="locale-transition-indicator">
+        <LocaleScramble active={isPending} />
+      </span>
     </label>
   );
 }

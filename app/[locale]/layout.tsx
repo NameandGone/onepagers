@@ -1,4 +1,6 @@
 import { notFound } from "next/navigation";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
 import { LOCALES, isLocale } from "../../locale-config";
 
 export function generateStaticParams() {
@@ -11,5 +13,10 @@ export default async function LocaleLayout({
 }: Readonly<{ children: React.ReactNode; params: Promise<{ locale: string }> }>) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
-  return children;
+  const messages = await getMessages({ locale });
+  return (
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      {children}
+    </NextIntlClientProvider>
+  );
 }
