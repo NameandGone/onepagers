@@ -26,6 +26,6 @@ export function getDirection(locale: Locale): "ltr" | "rtl" {
 }
 
 export function localizedPath(locale: Locale, path = ""): string {
-  const suffix = path ? `/${path.replace(/^\/+/, "")}` : "/";
+  const suffix = path ? `/${path.replace(/^\/+/, "")}` : "";
   return `/${locale}${suffix}`;
 }

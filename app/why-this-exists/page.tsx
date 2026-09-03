@@ -3,7 +3,8 @@ import Link from "next/link";
 import { ExpandingArrowLink } from "../components/expanding-arrow-link";
 import { LanguageSwitcher } from "../components/language-switcher";
 import { localizedPath, type Locale } from "../../locale-config";
-import { makeLocalizedMetadata } from "../../i18n/seo";
+import { localizedUrl, makeLocalizedMetadata } from "../../i18n/seo";
+import { SITE_URL } from "../site-config";
 
 export async function generateMetadata() {
   const locale = await getLocale() as Locale;
@@ -15,9 +16,19 @@ export default async function WhyThisExistsPage() {
   const locale = await getLocale() as Locale;
   const t = await getTranslations("why");
   const common = await getTranslations("common");
+  const aboutSchema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: `${t("titleLine1")} ${t("titleLine2")}`,
+    description: t("lede"),
+    url: localizedUrl(locale, "why-this-exists"),
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    inLanguage: locale,
+  };
 
   return (
     <main className="studio-shell studio-page-shell">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema).replace(/</g, "\\u003c") }} />
       <header className="studio-header">
         <Link className="studio-wordmark" href={localizedPath(locale)} aria-label={common("homeAria")}>
           <span>onepagers</span>

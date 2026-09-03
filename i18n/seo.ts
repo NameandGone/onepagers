@@ -4,7 +4,7 @@ import { LOCALE_CODES } from "../locale-config";
 import { SITE_URL } from "../app/site-config";
 
 export function localizedUrl(locale: Locale, path = ""): string {
-  const suffix = path ? `/${path.replace(/^\/+/, "")}` : "/";
+  const suffix = path ? `/${path.replace(/^\/+/, "")}` : "";
   return `${SITE_URL}/${locale}${suffix}`;
 }
 

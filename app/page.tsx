@@ -5,19 +5,20 @@ import { LanguageSwitcher } from "./components/language-switcher";
 import { TextScramble } from "./components/text-scramble";
 import { StackedCircularFooter } from "./components/stacked-circular-footer";
 import { localizedPath, type Locale } from "../locale-config";
+import { SITE_URL } from "./site-config";
 
 const TOOLS = [
   {
     key: "closing",
-    href: "https://closing.molt-rebirth.in",
+    href: "https://closing.molt-rebirth.in/en",
   },
   {
     key: "discovery",
-    href: "https://discovery.molt-rebirth.in",
+    href: "https://discovery.molt-rebirth.in/en",
   },
   {
     key: "k1",
-    href: "https://k1.molt-rebirth.in",
+    href: "https://k1.molt-rebirth.in/en",
   },
 ];
 
@@ -25,9 +26,42 @@ export default async function HomePage() {
   const locale = await getLocale() as Locale;
   const t = await getTranslations("home");
   const common = await getTranslations("common");
+  const toolList = TOOLS.map((tool, index) => {
+    const key = `${tool.key[0].toUpperCase()}${tool.key.slice(1)}`;
+    return {
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "SoftwareApplication",
+        name: t(`tool${key}Name`),
+        description: t(`tool${key}Description`),
+        url: tool.href,
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Web",
+        isAccessibleForFree: true,
+      },
+    };
+  });
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${SITE_URL}/#website`,
+    name: "onepagers",
+    url: `${SITE_URL}/${locale}`,
+    description: t("heroLede"),
+    inLanguage: locale,
+  };
+  const toolsSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: t("toolsTitle"),
+    itemListElement: toolList,
+  };
 
   return (
     <main className="studio-shell">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(toolsSchema).replace(/</g, "\\u003c") }} />
       <header className="studio-header">
         <a className="studio-wordmark" href={localizedPath(locale)} aria-label={common("homeAria")}>
           <span>onepagers</span>
