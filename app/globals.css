@@ -1435,7 +1435,6 @@ html[data-locale-transition="true"] main {
   }
 
   .hero-image {
-    transform: scale(1.35);
-    transform-origin: center bottom;
+    transform: none;
   }
 }
