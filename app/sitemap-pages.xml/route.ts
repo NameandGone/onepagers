@@ -1,22 +1,28 @@
 import { LOCALE_CODES, type Locale } from "../../locale-config";
 import { localizedUrl } from "../../i18n/seo";
 
-const PUBLIC_PATHS = ["", "why-this-exists", "faq"] as const;
+const INDEXABLE_PAGES = [
+  { path: "", changeFrequency: "weekly", priority: 1 },
+  { path: "why-this-exists", changeFrequency: "monthly", priority: 0.8 },
+  { path: "faq", changeFrequency: "weekly", priority: 0.8 },
+] as const;
 
 export const revalidate = 86_400;
 
 export function GET(): Response {
-  const urls = PUBLIC_PATHS.flatMap((path) =>
+  const urls = INDEXABLE_PAGES.flatMap((page) =>
     LOCALE_CODES.map((code) => {
       const locale = code as Locale;
       const alternates = [
-        ...LOCALE_CODES.map((alternateCode) => [alternateCode, localizedUrl(alternateCode as Locale, path)] as const),
-        ["x-default", localizedUrl("en", path)] as const,
+        ...LOCALE_CODES.map((alternateCode) => [alternateCode, localizedUrl(alternateCode as Locale, page.path)] as const),
+        ["x-default", localizedUrl("en", page.path)] as const,
       ];
       return [
         "  <url>",
-        `    <loc>${escapeXml(localizedUrl(locale, path))}</loc>`,
+        `    <loc>${escapeXml(localizedUrl(locale, page.path))}</loc>`,
         ...alternates.map(([language, url]) => `    <xhtml:link rel="alternate" hreflang="${language}" href="${escapeXml(url)}" />`),
+        `    <changefreq>${page.changeFrequency}</changefreq>`,
+        `    <priority>${page.priority}</priority>`,
         "  </url>",
       ].join("\n");
     }),
