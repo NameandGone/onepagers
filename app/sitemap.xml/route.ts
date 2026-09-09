@@ -70,7 +70,7 @@ function xmlResponse(body: string): Response {
   return new Response(body, {
     headers: {
       "cache-control": "public, max-age=0, s-maxage=86400, stale-while-revalidate=86400",
-      "content-type": "application/xml; charset=utf-8",
+      "content-type": "text/xml; charset=utf-8",
     },
   });
 }
