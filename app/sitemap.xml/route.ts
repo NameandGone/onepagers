@@ -33,7 +33,7 @@ export function GET(): Response {
 
   const body = [
     '<?xml version="1.0" encoding="UTF-8"?>',
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
     ...urls,
     "</urlset>",
   ].join("\n");
@@ -43,18 +43,10 @@ export function GET(): Response {
 
 function renderUrl(baseUrl: string, locale: string, page: SitemapPage): string {
   const pageUrl = localizedUrl(baseUrl, locale, page.path);
-  const alternates = [
-    ...LOCALE_CODES.map(
-      (alternateLocale) =>
-        `    <xhtml:link rel="alternate" hreflang="${alternateLocale}" href="${escapeXml(localizedUrl(baseUrl, alternateLocale, page.path))}" />`,
-    ),
-    `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(localizedUrl(baseUrl, "en", page.path))}" />`,
-  ];
 
   return [
     "  <url>",
     `    <loc>${escapeXml(pageUrl)}</loc>`,
-    ...alternates,
     `    <changefreq>${page.changeFrequency}</changefreq>`,
     `    <priority>${page.priority}</priority>`,
     "  </url>",
